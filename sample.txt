@@ -1,0 +1,47 @@
+# CLASS DOG
+# 
+# Sample creation:
+#   fido = Dog.new('Fido','mutt',35,  Time.local(2008,"feb",8))
+# Other methods:
+#   about, hungry?, whine, bark, puppy?
+
+class Dog < Object
+
+ attr_accessor :name, :breed, :birthday, :pounds
+
+ def initialize (name, breed, pounds, birthday)
+   self.name = name || 'dog'
+   self.breed = breed || 'mutt'
+   self.birthday = birthday || Time.now
+   self.pounds = pounds
+ end #  initialize
+
+ def hungry?; "you bet!" ; end
+ def whine; "whine!" ; end
+ def bark ; puts name + " says bark bark!" ; end
+
+ # SIZE: return a symbolic analysis of the dog's size based on pounds
+ def size
+   case pounds
+     when 1..10 then    :tiny
+     when 11..30 then   :small
+     when 31..60 then   :medium
+     when 61..120 then  :large
+     when 121..500 then :humongous
+     else :way_too_big
+   end  # case
+ end #  size
+
+ # ABOUT: returns a string suitable for printing
+ def about
+   "#{name} is a #{breed} weighing #{pounds}lbs " +
+   "(a size #{size} dog), " +
+     "who is #{hungry? ? "hungry!" : "ready for play"}\n"
+ end # about
+
+ def puppy?
+   year_in_seconds = (365 * 24 * 60 * 60)
+   (Time.now - birthday > year_in_seconds) ? true : false
+ end # puppy?
+
+end # class Dog
